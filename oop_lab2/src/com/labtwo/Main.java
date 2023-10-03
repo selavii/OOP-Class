@@ -1,7 +1,6 @@
 package com.labtwo;
 import com.labtwo.models.behaviour.LoopApp;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class Main {
 
