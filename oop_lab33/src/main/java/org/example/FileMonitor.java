@@ -2,6 +2,11 @@ package org.example;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
+
+import org.example.FileHandler;
+import org.example.FileHandlerFactory;
 
 public class FileMonitor {
 
@@ -39,7 +44,7 @@ public class FileMonitor {
         }
 
         for (File file : files) {
-            if (file.lastModified() > lastSnapshot.toEpochSecond()) {
+            if (file.lastModified() > lastSnapshot.toInstant(ZoneOffset.UTC).toEpochMilli()) {
                 System.out.println(file.getName() + " - Changed");
             } else {
                 System.out.println(file.getName() + " - No Change");
