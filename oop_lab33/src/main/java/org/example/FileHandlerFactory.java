@@ -1,12 +1,10 @@
 package org.example;
-import org.example.File;
-import org.example.FileHandler;
-import org.example.FileMonitor;
-import java.io.File;
+
+import java.io.File;  // Corrected import
 
 public class FileHandlerFactory {
 
-    public static FileHandler getFileHandler(File file) {
+    public static FileHandler getFileHandler(File file) {  // Using the standard File import
         String extension = getFileExtension(file.getName());
         switch (extension) {
             case "txt":
