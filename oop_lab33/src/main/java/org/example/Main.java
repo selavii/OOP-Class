@@ -1,11 +1,11 @@
 package org.example;
-import org.example.FileMonitor;
+
 
 import java.util.Scanner;
 
 public class Main{
     public static void main(String[] args) {
-        FileMonitor monitor = new FileMonitor("/path/to/folder");  // Replace with your folder path
+        FileMonitor monitor = new FileMonitor("C:\\Users\\Daniel\\Documents\\GitHub\\OOP-Class\\oop_lab33\\src\\main\\java\\org\\example");
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
