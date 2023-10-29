@@ -1,11 +1,9 @@
 package org.example;
 
-import java.io.File;
-
 public class FileHandlerFactory {
 
-    public static FileHandler getFileHandler(File file) {
-        String extension = getFileExtension(file.getName());
+    public static FileHandler getFileHandler(CustomFile file) {
+        String extension = file.getExtension();
         switch (extension) {
             case "txt":
                 return new TextFileHandler(file);
@@ -18,10 +16,5 @@ public class FileHandlerFactory {
             default:
                 return new GenericFileHandler(file);
         }
-    }
-
-    private static String getFileExtension(String filename) {
-        int dotIndex = filename.lastIndexOf(".");
-        return (dotIndex == -1) ? "" : filename.substring(dotIndex + 1).toLowerCase();
     }
 }

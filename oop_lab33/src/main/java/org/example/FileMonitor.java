@@ -1,6 +1,6 @@
 package org.example;
 
-import java.io.File;  // Import the correct File class from java.io package
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
@@ -23,13 +23,14 @@ public class FileMonitor {
     }
 
     public void info(String fileName) {
-        File file = new File(directoryPath, fileName);
-        if (!file.exists()) {
+        File ioFile = new File(directoryPath, fileName);  // Retain this for checking if the file exists
+        if (!ioFile.exists()) {
             System.out.println("File does not exist.");
             return;
         }
 
-        FileHandler handler = FileHandlerFactory.getFileHandler(file);
+        CustomFile customFile = new CustomFile(directoryPath, fileName);
+        FileHandler handler = FileHandlerFactory.getFileHandler(customFile);
         handler.printInfo();
     }
 

@@ -1,11 +1,9 @@
 package org.example;
-import java.io.File;
-
 
 public abstract class FileHandler {
-    protected File file;
+    protected CustomFile file;
 
-    public FileHandler(File file) {
+    public FileHandler(CustomFile file) {
         this.file = file;
     }
 

@@ -1,6 +1,6 @@
 package org.example;
-import org.example.File;
-public class TextFile extends File {
+
+public class TextFile extends CustomFile {
 
     public TextFile(String name, String extension) {
         super(name, extension);

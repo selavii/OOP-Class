@@ -1,14 +1,15 @@
 package org.example;
-import java.io.File;
 
 public class ProgramFileHandler extends FileHandler {
 
-    public ProgramFileHandler(File file) {
+    public ProgramFileHandler(CustomFile file) {
         super(file);
     }
 
     @Override
     public void printInfo() {
-        System.out.println("This is a Program file named: " + file.getName());
+
+        System.out.println("This is a program file. Name: " + file.getName() + ", Extension: " + file.getExtension());
+
     }
 }
