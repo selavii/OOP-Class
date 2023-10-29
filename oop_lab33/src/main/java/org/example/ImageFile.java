@@ -11,8 +11,4 @@ public class ImageFile extends CustomFile {
     public String getDimensions() {
         return dimensions;
     }
-
-    public void setDimensions(String dimensions) {
-        this.dimensions = dimensions;
-    }
 }

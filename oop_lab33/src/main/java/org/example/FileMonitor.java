@@ -4,9 +4,6 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-import org.example.FileHandler;
-import org.example.FileHandlerFactory;
-
 public class FileMonitor {
 
     private String directoryPath;
@@ -23,13 +20,33 @@ public class FileMonitor {
     }
 
     public void info(String fileName) {
-        File ioFile = new File(directoryPath, fileName);  // Retain this for checking if the file exists
+        File ioFile = new File(directoryPath, fileName);
         if (!ioFile.exists()) {
             System.out.println("File does not exist.");
             return;
         }
 
-        CustomFile customFile = new CustomFile(directoryPath, fileName);
+        String extension = getFileExtension(fileName);
+
+        CustomFile customFile;
+
+        switch (extension) {
+            case "jpg":
+            case "png":
+                customFile = new ImageFile(fileName, extension, "unknown"); // Placeholder dimension
+                break;
+            case "txt":
+                customFile = new TextFile(fileName, extension);
+                break;
+            case "py":
+            case "java":
+                customFile = new ProgramFile(fileName, extension);
+                break;
+            default:
+                customFile = new CustomFile(fileName, extension);
+                break;
+        }
+
         FileHandler handler = FileHandlerFactory.getFileHandler(customFile);
         handler.printInfo();
     }
@@ -77,5 +94,13 @@ public class FileMonitor {
                 System.out.println("Invalid command.");
                 return true;
         }
+    }
+
+    private String getFileExtension(String fileName) {
+        int dotIndex = fileName.lastIndexOf('.');
+        if(dotIndex > 0 && dotIndex < fileName.length() - 1) {
+            return fileName.substring(dotIndex + 1);
+        }
+        return "";  // or return a default value
     }
 }

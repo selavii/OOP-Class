@@ -8,7 +8,10 @@ public class ImageFileHandler extends FileHandler {
 
     @Override
     public void printInfo() {
-
-        System.out.println("This is an image file. Name: " + file.getName() + ", Dimensions: " + ((ImageFile) file).getDimensions());
+        if(file instanceof ImageFile) {
+            System.out.println("This is an image file. Name: " + file.getName() + ", Dimensions: " + ((ImageFile) file).getDimensions());
+        } else {
+            System.out.println("Error: Invalid file type for ImageFileHandler.");
+        }
     }
 }
