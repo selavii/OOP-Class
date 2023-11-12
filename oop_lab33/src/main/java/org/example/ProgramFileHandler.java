@@ -42,7 +42,7 @@ public class ProgramFileHandler extends FileHandler {
                 }
             }
 
-            // Print line, class, and method counts
+
             System.out.println("Line Count: " + lineCount);
             System.out.println("Class Count: " + classCount);
             System.out.println("Method Count: " + methodCount);

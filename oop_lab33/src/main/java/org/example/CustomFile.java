@@ -7,7 +7,7 @@ public class CustomFile {
     protected String extension;
     protected LocalDateTime createdTime;
     protected LocalDateTime updatedTime;
-    protected String filePath; // New field to store the full file path
+    protected String filePath;
 
     public CustomFile(String name, String extension) {
         this.name = name;

@@ -52,7 +52,7 @@ public class FileMonitor {
                 break;
         }
 
-        // Set the file path
+
         customFile.setFilePath(ioFile.getAbsolutePath());
 
         FileHandler handler = FileHandlerFactory.getFileHandler(customFile, directoryPath);
