@@ -29,21 +29,26 @@ public class TextFileHandler extends FileHandler {
             LocalDateTime modifiedTime = LocalDateTime.ofInstant(attrs.lastModifiedTime().toInstant(), ZoneId.systemDefault());
 
             BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()));
+            StringBuilder contentBuilder = new StringBuilder();
             String line;
-            int lineCount = 0;
-            int wordCount = 0;
-            int charCount = 0;
 
             while ((line = reader.readLine()) != null) {
-                lineCount++;
-                charCount += line.length();
-                wordCount += line.split("\\s+").length;
+                contentBuilder.append(line).append("\n");
             }
             reader.close();
 
+            String content = contentBuilder.toString();
+            String[] lines = content.split("\\."); // Split lines based on the last period (.)
+
+            int lineCount = lines.length;
+            int wordCount = content.split("\\s+").length;
+            int charCount = content.length();
+
             System.out.println("This is a text file. Name: " + file.getName() + ", Extension: " + file.getExtension());
             System.out.println("Created: " + createdTime + ", Updated: " + modifiedTime);
-            System.out.println("Lines: " + lineCount + ", Words: " + wordCount + ", Characters: " + charCount);
+            System.out.println("Lines: " + lineCount);
+            System.out.println("Words: " + wordCount);
+            System.out.println("Characters: " + charCount);
 
         } catch (IOException e) {
             System.out.println("Error reading the file: " + e.getMessage());
