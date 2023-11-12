@@ -1,6 +1,5 @@
 package org.example;
 
-
 import java.time.LocalDateTime;
 
 public class CustomFile {
@@ -8,6 +7,7 @@ public class CustomFile {
     protected String extension;
     protected LocalDateTime createdTime;
     protected LocalDateTime updatedTime;
+    protected String filePath; // New field to store the full file path
 
     public CustomFile(String name, String extension) {
         this.name = name;
@@ -35,5 +35,12 @@ public class CustomFile {
     public void setUpdatedTime(LocalDateTime updatedTime) {
         this.updatedTime = updatedTime;
     }
-}
 
+    public void setFilePath(String filePath) { // New setter for filePath
+        this.filePath = filePath;
+    }
+
+    public String getFilePath() { // Getter for filePath
+        return filePath;
+    }
+}

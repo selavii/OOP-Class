@@ -33,7 +33,7 @@ public class FileMonitor {
         switch (extension) {
             case "jpg":
             case "png":
-                customFile = new ImageFile(fileName, extension, "unknown"); // Placeholder for dimensions
+                customFile = new ImageFile(fileName, extension, "unknown");
                 break;
             case "txt":
                 customFile = new TextFile(fileName, extension);
@@ -45,6 +45,9 @@ public class FileMonitor {
                 customFile = new CustomFile(fileName, extension);
                 break;
         }
+
+        // Set the file path
+        customFile.setFilePath(ioFile.getAbsolutePath());
 
         FileHandler handler = FileHandlerFactory.getFileHandler(customFile, directoryPath);
         handler.printInfo();

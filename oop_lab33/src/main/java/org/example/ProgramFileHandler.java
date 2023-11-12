@@ -3,8 +3,12 @@ package org.example;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.time.LocalDateTime;
+import java.time.ZoneId; // Add this import
 
 public class ProgramFileHandler extends FileHandler {
 
@@ -38,9 +42,19 @@ public class ProgramFileHandler extends FileHandler {
                 }
             }
 
+            // Print line, class, and method counts
             System.out.println("Line Count: " + lineCount);
             System.out.println("Class Count: " + classCount);
             System.out.println("Method Count: " + methodCount);
+
+            // Retrieve and print creation and last modified times in local time zone
+            BasicFileAttributes attrs = Files.readAttributes(filePath, BasicFileAttributes.class);
+            LocalDateTime creationTime = attrs.creationTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            LocalDateTime modifiedTime = attrs.lastModifiedTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+            System.out.println("Creation Time: " + creationTime);
+            System.out.println("Last Modified Time: " + modifiedTime);
+
         } catch (IOException e) {
             System.out.println("Error reading the file: " + e.getMessage());
         }
