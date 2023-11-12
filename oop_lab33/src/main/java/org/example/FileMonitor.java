@@ -3,19 +3,25 @@ package org.example;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FileMonitor {
 
     private String directoryPath;
     private LocalDateTime lastSnapshot;
+    private Map<String, Long> fileModificationTimes;
 
     public FileMonitor(String directoryPath) {
         this.directoryPath = directoryPath;
         this.lastSnapshot = LocalDateTime.now();
+        this.fileModificationTimes = new HashMap<>();
+        updateFileModificationTimes();
     }
 
     public void commit() {
         this.lastSnapshot = LocalDateTime.now();
+        updateFileModificationTimes();
         System.out.println("Snapshot time updated.");
     }
 
@@ -54,6 +60,8 @@ public class FileMonitor {
     }
 
     public void status() {
+        System.out.println("Checking status...");
+
         File dir = new File(directoryPath);
         File[] files = dir.listFiles();
 
@@ -63,10 +71,18 @@ public class FileMonitor {
         }
 
         for (File file : files) {
-            if (file.lastModified() > lastSnapshot.toInstant(ZoneOffset.UTC).toEpochMilli()) {
-                System.out.println(file.getName() + " - Changed");
+            long lastModifiedTime = file.lastModified();
+
+            if (fileModificationTimes.containsKey(file.getName())) {
+                long previousModifiedTime = fileModificationTimes.get(file.getName());
+
+                if (lastModifiedTime > previousModifiedTime) {
+                    System.out.println(file.getName() + " - Changed");
+                } else {
+                    System.out.println(file.getName() + " - No Change");
+                }
             } else {
-                System.out.println(file.getName() + " - No Change");
+                System.out.println(file.getName() + " - Not tracked");
             }
         }
     }
@@ -104,5 +120,20 @@ public class FileMonitor {
             return fileName.substring(dotIndex + 1);
         }
         return "";
+    }
+
+    private void updateFileModificationTimes() {
+        File dir = new File(directoryPath);
+        File[] files = dir.listFiles();
+
+        if (files == null) {
+            System.out.println("Error reading directory.");
+            return;
+        }
+
+        for (File file : files) {
+            long lastModifiedTime = file.lastModified();
+            fileModificationTimes.put(file.getName(), lastModifiedTime);
+        }
     }
 }
