@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main{
     public static void main(String[] args) {
-        FileMonitor monitor = new FileMonitor("C://Users//Daniel//Documents//GitHub//OOP-Class//oop_lab33//src//main//java//org//example");
+        FileMonitor monitor = new FileMonitor("C:/periodic");
         Scanner scanner = new Scanner(System.in);
 
         while (true) {

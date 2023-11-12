@@ -3,26 +3,31 @@ package org.example;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class TextFileHandler extends FileHandler {
 
-    public TextFileHandler(CustomFile file) {
+    private String directoryPath;
+
+    public TextFileHandler(CustomFile file, String directoryPath) {
         super(file);
+        this.directoryPath = directoryPath;
     }
 
     @Override
     public void printInfo() {
-        System.out.println("This is a text file. Name: " + file.getName() + ", Extension: " + file.getExtension());
-        System.out.println("Created: " + file.getCreatedTime() + ", Updated: " + file.getUpdatedTime());
+        Path filePath = Paths.get(directoryPath, file.getName());
 
-        // Check if file name already contains the extension
-        String completeFileName = file.getName().endsWith("." + file.getExtension()) ? file.getName() : file.getName() + "." + file.getExtension();
-
-        // Extract metrics from the actual file
         try {
-            Path filePath = Paths.get(completeFileName);
+            BasicFileAttributes attrs = Files.readAttributes(filePath, BasicFileAttributes.class);
+            LocalDateTime createdTime = LocalDateTime.ofInstant(attrs.creationTime().toInstant(), ZoneId.systemDefault());
+            LocalDateTime modifiedTime = LocalDateTime.ofInstant(attrs.lastModifiedTime().toInstant(), ZoneId.systemDefault());
+
             BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()));
             String line;
             int lineCount = 0;
@@ -32,11 +37,14 @@ public class TextFileHandler extends FileHandler {
             while ((line = reader.readLine()) != null) {
                 lineCount++;
                 charCount += line.length();
-                String[] words = line.split("\\s+");
-                wordCount += words.length;
+                wordCount += line.split("\\s+").length;
             }
             reader.close();
+
+            System.out.println("This is a text file. Name: " + file.getName() + ", Extension: " + file.getExtension());
+            System.out.println("Created: " + createdTime + ", Updated: " + modifiedTime);
             System.out.println("Lines: " + lineCount + ", Words: " + wordCount + ", Characters: " + charCount);
+
         } catch (IOException e) {
             System.out.println("Error reading the file: " + e.getMessage());
         }

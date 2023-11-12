@@ -33,12 +33,11 @@ public class FileMonitor {
         switch (extension) {
             case "jpg":
             case "png":
-                customFile = new ImageFile(fileName, extension, "unknown"); // Placeholder dimension
+                customFile = new ImageFile(fileName, extension, "unknown"); // Placeholder for dimensions
                 break;
             case "txt":
                 customFile = new TextFile(fileName, extension);
                 break;
-            case "py":
             case "java":
                 customFile = new ProgramFile(fileName, extension);
                 break;
@@ -47,7 +46,7 @@ public class FileMonitor {
                 break;
         }
 
-        FileHandler handler = FileHandlerFactory.getFileHandler(customFile);
+        FileHandler handler = FileHandlerFactory.getFileHandler(customFile, directoryPath);
         handler.printInfo();
     }
 
@@ -98,9 +97,9 @@ public class FileMonitor {
 
     private String getFileExtension(String fileName) {
         int dotIndex = fileName.lastIndexOf('.');
-        if(dotIndex > 0 && dotIndex < fileName.length() - 1) {
+        if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
             return fileName.substring(dotIndex + 1);
         }
-        return "";  // or return a default value
+        return "";
     }
 }
