@@ -36,7 +36,7 @@ public class ProgramFileHandler extends FileHandler {
                 if (line.contains("class ")) {
                     classCount++;
                 }
-                // Basic method count - can be improved
+
                 if (line.contains("void ") || line.contains("int ") || line.contains("String ")) {
                     methodCount++;
                 }
@@ -47,7 +47,7 @@ public class ProgramFileHandler extends FileHandler {
             System.out.println("Class Count: " + classCount);
             System.out.println("Method Count: " + methodCount);
 
-            // Retrieve and print creation and last modified times in local time zone
+
             BasicFileAttributes attrs = Files.readAttributes(filePath, BasicFileAttributes.class);
             LocalDateTime creationTime = attrs.creationTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
             LocalDateTime modifiedTime = attrs.lastModifiedTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();

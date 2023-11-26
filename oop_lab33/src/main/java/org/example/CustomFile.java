@@ -43,4 +43,9 @@ public class CustomFile {
     public String getFilePath() { // Getter for filePath
         return filePath;
     }
+
+    public void printInfo() {
+        System.out.println(this.extension);
+        System.out.println(this.name);
+    }
 }

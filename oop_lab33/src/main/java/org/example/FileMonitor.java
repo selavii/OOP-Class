@@ -53,6 +53,7 @@ public class FileMonitor {
         }
 
 
+        customFile.printInfo();
         customFile.setFilePath(ioFile.getAbsolutePath());
 
         FileHandler handler = FileHandlerFactory.getFileHandler(customFile, directoryPath);

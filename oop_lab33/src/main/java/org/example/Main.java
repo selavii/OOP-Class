@@ -8,7 +8,7 @@ public class Main{
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            displayMenu();  // Display the menu options
+            displayMenu();
             System.out.print("Enter command: ");
             if (!monitor.processCommand(scanner.nextLine())) {
                 scanner.close();

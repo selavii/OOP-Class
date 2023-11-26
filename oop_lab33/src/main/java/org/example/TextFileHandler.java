@@ -38,7 +38,7 @@ public class TextFileHandler extends FileHandler {
             reader.close();
 
             String content = contentBuilder.toString();
-            String[] lines = content.split("\\."); // Split lines based on the last period (.)
+            String[] lines = content.split("\\.");
 
             int lineCount = lines.length;
             int wordCount = content.split("\\s+").length;

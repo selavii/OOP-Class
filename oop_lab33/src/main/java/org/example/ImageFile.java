@@ -11,4 +11,10 @@ public class ImageFile extends CustomFile {
     public String getDimensions() {
         return dimensions;
     }
+
+    @Override
+    public void printInfo() {
+        super.printInfo();
+        System.out.println(this.dimensions);
+    }
 }
