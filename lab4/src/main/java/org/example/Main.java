@@ -1,7 +1,6 @@
 package org.example;
-import java.sql.SQLOutput;
 import java.util.Scanner;
-import java.util.SortedMap;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -13,7 +12,7 @@ public class Main {
 
 
         // Testing ArrayStack with Integers and Strings
-        System.out.println("------------------Popualating the ArrayStack---------------");
+        System.out.println("------------------Populating the ArrayStack---------------");
         ArrayStack<Integer> arrayStackInt = new ArrayStack<>(10);
         ArrayStack<String> arrayStackStr = new ArrayStack<>(10);
         for (int i = 1; i <= 5; i++) {

@@ -1,6 +1,6 @@
 package org.example;
 
-public class ArrayQueue<Element> {
+public class ArrayQueue<Element> implements QueueInterface<Element> {
     private Element[] queueArray;
     private int frontIndex, rearIndex, currentSize, queueCapacity;
 
@@ -11,6 +11,7 @@ public class ArrayQueue<Element> {
         rearIndex = capacity - 1;
     }
 
+    @Override
     public void enqueue(Element item) {
         if (currentSize == queueCapacity) throw new IllegalStateException("Queue is full");
         rearIndex = (rearIndex + 1) % queueCapacity;
@@ -18,6 +19,7 @@ public class ArrayQueue<Element> {
         currentSize++;
     }
 
+    @Override
     public Element dequeue() {
         if (isEmpty()) throw new IllegalStateException("Queue is empty");
         Element item = queueArray[frontIndex];
@@ -26,15 +28,18 @@ public class ArrayQueue<Element> {
         return item;
     }
 
+    @Override
     public Element peek() {
         if (isEmpty()) throw new IllegalStateException("Queue is empty");
         return queueArray[frontIndex];
     }
 
+    @Override
     public boolean isEmpty() {
         return currentSize == 0;
     }
 
+    @Override
     public int size() {
         return currentSize;
     }

@@ -1,6 +1,6 @@
 package org.example;
 
-public class LinkedListQueue<Element> {
+public class LinkedListQueue<Element> implements QueueInterface<Element> {
     private static class QueueNode<Element> {
         Element data;
         QueueNode<Element> next;
@@ -12,6 +12,7 @@ public class LinkedListQueue<Element> {
 
     private QueueNode<Element> frontNode, rearNode;
 
+    @Override
     public void enqueue(Element item) {
         QueueNode<Element> newNode = new QueueNode<>(item);
         if (isEmpty()) {
@@ -22,6 +23,7 @@ public class LinkedListQueue<Element> {
         }
     }
 
+    @Override
     public Element dequeue() {
         if (isEmpty()) throw new IllegalStateException("Queue is empty");
         Element item = frontNode.data;
@@ -30,15 +32,18 @@ public class LinkedListQueue<Element> {
         return item;
     }
 
+    @Override
     public Element peek() {
         if (isEmpty()) throw new IllegalStateException("Queue is empty");
         return frontNode.data;
     }
 
+    @Override
     public boolean isEmpty() {
         return frontNode == null;
     }
 
+    @Override
     public int size() {
         int nodeCount = 0;
         QueueNode<Element> currentNode = frontNode;

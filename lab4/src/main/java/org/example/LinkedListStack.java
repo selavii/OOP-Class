@@ -1,6 +1,6 @@
 package org.example;
 
-public class LinkedListStack<Element> {
+public class LinkedListStack<Element> implements StackInterface<Element> {
     private static class StackNode<Element> {
         Element data;
         StackNode<Element> next;
@@ -12,12 +12,14 @@ public class LinkedListStack<Element> {
 
     private StackNode<Element> topNode;
 
+    @Override
     public void push(Element item) {
         StackNode<Element> newNode = new StackNode<>(item);
         newNode.next = topNode;
         topNode = newNode;
     }
 
+    @Override
     public Element pop() {
         if (isEmpty()) {
             throw new IllegalStateException("Stack is empty");
@@ -27,6 +29,7 @@ public class LinkedListStack<Element> {
         return item;
     }
 
+    @Override
     public Element peek() {
         if (isEmpty()) {
             throw new IllegalStateException("Stack is empty");
@@ -34,10 +37,12 @@ public class LinkedListStack<Element> {
         return topNode.data;
     }
 
+    @Override
     public boolean isEmpty() {
         return topNode == null;
     }
 
+    @Override
     public int size() {
         int nodeCount = 0;
         StackNode<Element> currentNode = topNode;
